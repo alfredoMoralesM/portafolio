@@ -7,7 +7,7 @@
 
 ## 🔗 Live
 
-[alfredomoralesm.github.io/portfolio]([https://alfredomoralesm.github.io/portafolio])
+https://alfredomoralesm.github.io/portafolio
 
 ---
 
