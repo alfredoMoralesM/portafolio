@@ -1,0 +1,610 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Alfredo Morales — Portfolio</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@400;500&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+:root{
+  --bg:#F8F7F4;--surface:#FFFFFF;--border:#E4E0D8;--border-strong:#C8C4BB;
+  --text:#1A1916;--muted:#6B6860;--accent:#1B4FD8;--accent-bg:#EEF2FF;--accent-text:#1B4FD8;
+  --green:#0A6640;--green-bg:#EDFAF4;--amber:#7A4A0A;--amber-bg:#FEF4E4;
+  --tag-bg:#F0EDE8;--tag-text:#3D3B36;
+  --shadow:0 1px 3px rgba(0,0,0,.06),0 4px 12px rgba(0,0,0,.04);
+  --red-bg:#FEF2F2;--red:#991B1B;
+}
+html{scroll-behavior:smooth;}
+body{font-family:'Outfit',sans-serif;background:var(--bg);color:var(--text);line-height:1.65;font-size:16px;}
+
+/* NAV */
+nav{position:sticky;top:0;z-index:100;background:rgba(248,247,244,.94);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);padding:0 2rem;}
+.nav-inner{max-width:960px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;height:56px;}
+.nav-logo{font-family:'DM Serif Display',serif;font-size:18px;color:var(--text);text-decoration:none;letter-spacing:-.3px;}
+.nav-links{display:flex;gap:1.8rem;list-style:none;}
+.nav-links a{font-size:13px;font-weight:400;color:var(--muted);text-decoration:none;transition:color .2s;}
+.nav-links a:hover{color:var(--text);}
+
+/* HERO */
+.hero{max-width:960px;margin:0 auto;padding:72px 2rem 56px;display:grid;grid-template-columns:1fr auto;gap:3rem;align-items:start;}
+.hero-eyebrow{font-family:'DM Mono',monospace;font-size:11px;color:var(--accent);letter-spacing:.08em;text-transform:uppercase;margin-bottom:12px;}
+.hero h1{font-family:'DM Serif Display',serif;font-size:clamp(2.2rem,5vw,3.2rem);line-height:1.12;letter-spacing:-.5px;color:var(--text);margin-bottom:18px;}
+.hero h1 em{font-style:italic;color:var(--accent);}
+.hero-desc{font-size:15px;color:var(--muted);max-width:520px;margin-bottom:24px;font-weight:300;line-height:1.75;}
+.hero-tags{display:flex;flex-wrap:wrap;gap:7px;margin-bottom:28px;}
+.tag{font-size:11px;font-weight:500;background:var(--tag-bg);color:var(--tag-text);padding:4px 10px;border-radius:20px;border:1px solid var(--border);}
+.tag.accent{background:var(--accent-bg);color:var(--accent-text);border-color:#C7D4F7;}
+.hero-cta{display:flex;gap:10px;flex-wrap:wrap;}
+.btn{font-family:'Outfit',sans-serif;font-size:13px;font-weight:500;padding:9px 18px;border-radius:8px;text-decoration:none;transition:all .18s;border:1px solid transparent;}
+.btn-primary{background:var(--text);color:#fff;}
+.btn-primary:hover{background:#333;}
+.btn-secondary{background:var(--surface);color:var(--text);border-color:var(--border-strong);}
+.btn-secondary:hover{border-color:var(--text);}
+.hero-aside{min-width:170px;text-align:right;}
+.hero-meta{font-size:13px;color:var(--muted);line-height:2.1;}
+.hero-meta a{color:var(--accent);text-decoration:none;}
+.hero-meta a:hover{text-decoration:underline;}
+.status-badge{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:500;background:var(--green-bg);color:var(--green);padding:5px 12px;border-radius:20px;border:1px solid #B8EDD4;margin-bottom:14px;}
+.dot{width:7px;height:7px;border-radius:50%;background:#22c55e;animation:pulse 2s infinite;}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.5}}
+
+/* SECTION */
+section{max-width:960px;margin:0 auto;padding:56px 2rem;}
+.section-label{font-family:'DM Mono',monospace;font-size:11px;color:var(--muted);letter-spacing:.1em;text-transform:uppercase;margin-bottom:24px;display:flex;align-items:center;gap:12px;}
+.section-label::after{content:'';flex:1;height:1px;background:var(--border);}
+section h2{font-family:'DM Serif Display',serif;font-size:26px;letter-spacing:-.3px;margin-bottom:4px;}
+.section-intro{color:var(--muted);font-size:14px;margin-bottom:28px;font-weight:300;}
+.divider{border:none;border-top:1px solid var(--border);}
+
+/* PROJECT CARDS */
+.projects-grid{display:grid;gap:18px;}
+.project-card{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:28px 30px;box-shadow:var(--shadow);transition:border-color .2s,box-shadow .2s;position:relative;overflow:hidden;}
+.project-card:hover{border-color:var(--border-strong);box-shadow:0 2px 8px rgba(0,0,0,.08),0 8px 24px rgba(0,0,0,.06);}
+.project-card::before{content:'';position:absolute;top:0;left:0;width:4px;height:100%;background:var(--accent);opacity:0;transition:opacity .2s;}
+.project-card:hover::before{opacity:1;}
+
+/* Card badge row */
+.card-badge-row{display:flex;gap:6px;margin-bottom:14px;flex-wrap:wrap;}
+.badge{font-size:10px;font-weight:600;padding:3px 9px;border-radius:20px;letter-spacing:.04em;text-transform:uppercase;border:1px solid;}
+.badge-live{background:#ECFDF5;color:#065F46;border-color:#A7F3D0;}
+.badge-github{background:#F0F0F0;color:#374151;border-color:#D1D5DB;}
+.badge-console{background:#1A1A2E;color:#22C55E;border-color:#166534;}
+.badge-web{background:var(--accent-bg);color:var(--accent);border-color:#C7D4F7;}
+.badge-proposal{background:var(--amber-bg);color:var(--amber);border-color:#F5D9A0;}
+
+.card-header{display:flex;justify-content:space-between;align-items:flex-start;gap:16px;margin-bottom:8px;}
+.card-title-area h3{font-size:17px;font-weight:600;margin-bottom:3px;}
+.card-meta{font-size:11px;color:var(--muted);font-family:'DM Mono',monospace;}
+.card-links{display:flex;gap:7px;flex-shrink:0;flex-wrap:wrap;}
+.card-link{font-size:12px;font-weight:500;padding:5px 13px;border-radius:7px;text-decoration:none;transition:all .16s;border:1px solid var(--border-strong);color:var(--text);background:var(--bg);white-space:nowrap;}
+.card-link:hover{background:var(--text);color:#fff;border-color:var(--text);}
+.card-link.primary{background:var(--accent);color:#fff;border-color:var(--accent);}
+.card-link.primary:hover{background:#1340B0;}
+.card-link.disabled{opacity:.4;pointer-events:none;cursor:default;}
+
+.card-desc{font-size:14px;color:var(--muted);margin-bottom:14px;font-weight:300;line-height:1.65;}
+.card-highlights{list-style:none;margin-bottom:16px;}
+.card-highlights li{font-size:13px;color:var(--muted);padding:3px 0 3px 18px;position:relative;line-height:1.5;}
+.card-highlights li::before{content:'→';position:absolute;left:0;color:var(--accent);font-size:11px;top:5px;}
+.card-footer{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;}
+.tech-stack{display:flex;flex-wrap:wrap;gap:5px;}
+.tech{font-size:11px;font-family:'DM Mono',monospace;background:var(--tag-bg);color:var(--tag-text);padding:3px 8px;border-radius:4px;border:1px solid var(--border);}
+
+/* CREDENTIALS BOX */
+.credentials-box{background:var(--amber-bg);border:1px solid #F5D9A0;border-radius:10px;padding:16px 20px;margin-top:16px;}
+.cred-title{font-size:11px;font-weight:600;color:var(--amber);text-transform:uppercase;letter-spacing:.06em;margin-bottom:12px;font-family:'DM Mono',monospace;}
+.cred-section{margin-bottom:14px;}
+.cred-section-label{font-size:10px;color:#9A6310;font-family:'DM Mono',monospace;letter-spacing:.05em;text-transform:uppercase;margin-bottom:8px;padding-bottom:4px;border-bottom:1px solid #F0CA7A;}
+.cred-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:10px;}
+.cred-item .label{color:#9A6310;font-size:10px;font-family:'DM Mono',monospace;margin-bottom:2px;}
+.cred-item .value{font-weight:600;color:#4A2C08;font-family:'DM Mono',monospace;font-size:13px;}
+.cred-note{font-size:12px;color:#7A4A0A;margin-top:10px;font-style:italic;line-height:1.5;}
+.cred-matriculas{display:flex;flex-wrap:wrap;gap:6px;margin-top:4px;}
+.cred-mat-pill{background:#FDE9B4;color:#4A2C08;font-family:'DM Mono',monospace;font-size:12px;padding:3px 10px;border-radius:6px;border:1px solid #F0CA7A;font-weight:600;}
+
+/* PDF MANUALS */
+.manuals-area{background:#F5F3FF;border:1px solid #DDD6FE;border-radius:10px;padding:16px 20px;margin-top:14px;}
+.manuals-title{font-size:11px;font-weight:600;color:#4C1D95;text-transform:uppercase;letter-spacing:.06em;margin-bottom:10px;font-family:'DM Mono',monospace;}
+.manuals-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:8px;}
+.manual-item{background:#EDE9FE;border:1px solid #C4B5FD;border-radius:8px;padding:10px 14px;display:flex;align-items:center;gap:10px;text-decoration:none;transition:background .15s;}
+.manual-item:hover{background:#DDD6FE;}
+.manual-icon{font-size:20px;flex-shrink:0;}
+.manual-info .manual-name{font-size:13px;font-weight:500;color:#3730A3;}
+.manual-info .manual-role{font-size:11px;color:#6D28D9;margin-top:1px;}
+.manual-placeholder{font-size:12px;color:#6D28D9;font-style:italic;margin-top:6px;}
+
+/* CONSOLE PREVIEW */
+.console-preview{background:#0D1117;border:1px solid #30363D;border-radius:10px;padding:0;margin-top:14px;overflow:hidden;}
+.console-bar{background:#21262D;padding:10px 14px;display:flex;align-items:center;gap:8px;border-bottom:1px solid #30363D;}
+.console-dot{width:10px;height:10px;border-radius:50%;}
+.console-bar-title{font-family:'DM Mono',monospace;font-size:11px;color:#8B949E;margin-left:4px;}
+.console-body{padding:14px 18px;font-family:'DM Mono',monospace;font-size:13px;line-height:1.8;overflow-x:auto;}
+.c-cyan{color:#56D4F5;}
+.c-green{color:#3FB950;}
+.c-yellow{color:#E3B341;}
+.c-white{color:#C9D1D9;}
+.c-selector{color:#3FB950;font-weight:700;}
+
+/* SKILLS */
+.skills-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;}
+.skill-group{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:20px;}
+.skill-group-title{font-size:13px;font-weight:600;margin-bottom:14px;color:var(--text);}
+.skill-item{display:grid;grid-template-columns:1fr auto;grid-template-rows:auto 6px;gap:2px 8px;margin-bottom:12px;align-items:center;}
+.skill-name{font-size:13px;color:var(--muted);grid-column:1;grid-row:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.skill-level{font-size:10px;font-family:'DM Mono',monospace;color:var(--accent);background:var(--accent-bg);padding:2px 7px;border-radius:20px;grid-column:2;grid-row:1;white-space:nowrap;border:1px solid #C7D4F7;}
+.skill-bar-wrap{height:5px;background:var(--border);border-radius:3px;overflow:hidden;grid-column:1/-1;grid-row:2;}
+.skill-bar{height:100%;background:linear-gradient(90deg,var(--accent),#6B8EF0);border-radius:3px;}
+
+/* CERTS */
+.cert-list{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:11px;}
+.cert-item{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:14px 16px;display:flex;align-items:flex-start;gap:11px;}
+.cert-icon{width:30px;height:30px;border-radius:7px;background:var(--accent-bg);display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0;}
+.cert-name{font-size:13px;font-weight:500;line-height:1.4;}
+.cert-issuer{font-size:11px;color:var(--muted);margin-top:2px;}
+
+/* ABOUT */
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:start;}
+.about-text p{color:var(--muted);font-size:14px;font-weight:300;line-height:1.8;margin-bottom:14px;}
+.about-stats{display:grid;gap:11px;}
+.stat-card{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:16px 20px;}
+.stat-card .stat-num{font-size:26px;font-weight:600;font-family:'DM Serif Display',serif;color:var(--text);}
+.stat-card .stat-label{font-size:13px;color:var(--muted);margin-top:2px;}
+
+/* FOOTER */
+footer{border-top:1px solid var(--border);padding:28px 2rem;text-align:center;font-size:13px;color:var(--muted);}
+footer a{color:var(--accent);text-decoration:none;}
+
+/* SCREENSHOT */
+.site-screenshot{width:100%;border:1px solid var(--border);border-radius:8px;overflow:hidden;margin-top:14px;}
+.site-screenshot img{width:100%;display:block;}
+.site-screenshot-placeholder{background:var(--tag-bg);padding:24px;text-align:center;font-size:13px;color:var(--muted);font-style:italic;}
+
+/* PROJECT GALLERY */
+.project-gallery{margin-bottom:18px;border-bottom:1px solid var(--border);padding-bottom:16px;}
+.gallery-label{font-family:'DM Mono',monospace;font-size:10px;font-weight:600;color:var(--muted);letter-spacing:.08em;text-transform:uppercase;margin-bottom:10px;display:flex;align-items:center;gap:8px;}
+.gallery-label::after{content:'';flex:1;height:1px;background:var(--border);}
+.gallery-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;}
+.gallery-item{border-radius:8px;overflow:hidden;border:1px solid var(--border);background:var(--tag-bg);aspect-ratio:16/10;position:relative;cursor:pointer;transition:border-color .18s,box-shadow .18s;}
+.gallery-item:hover{border-color:var(--accent);box-shadow:0 0 0 2px var(--accent-bg);}
+.gallery-item img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .22s;opacity:1;}
+.gallery-item:hover img{transform:scale(1.06);}
+.gallery-placeholder{width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;color:var(--border-strong);font-size:10px;font-family:'DM Mono',monospace;}
+.gallery-placeholder-icon{font-size:18px;opacity:.5;}
+/* Lightbox */
+.lightbox{display:none;position:fixed;inset:0;background:rgba(0,0,0,.88);z-index:999;align-items:center;justify-content:center;padding:20px;}
+.lightbox.open{display:flex;}
+.lightbox img{max-width:90vw;max-height:88vh;border-radius:10px;box-shadow:0 8px 40px rgba(0,0,0,.5);}
+.lightbox-close{position:absolute;top:18px;right:22px;font-size:26px;color:#fff;cursor:pointer;line-height:1;opacity:.8;}
+.lightbox-close:hover{opacity:1;}
+
+
+@media(max-width:680px){
+  .hero{grid-template-columns:1fr;}
+  .hero-aside{text-align:left;}
+  .about-grid{grid-template-columns:1fr;}
+  .card-header{flex-direction:column;}
+  .nav-links{display:none;}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-inner">
+    <a href="#" class="nav-logo">Alfredo Morales</a>
+    <ul class="nav-links">
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#certs">Certifications</a></li>
+      <li><a href="#about">About</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div>
+    <div class="hero-eyebrow">IT Engineering · Finance Ops · Process Automation</div>
+    <h1>Hi, I'm<br>Alfredo <em>Morales</em></h1>
+    <p class="hero-desc">
+      IT Engineering student (7/9 semesters) with hands-on experience in process automation,
+      data-driven systems development and analytical problem-solving — aligned with
+      digital transformation goals and global finance operations.
+    </p>
+    <div class="hero-tags">
+      <span class="tag accent">Python</span>
+      <span class="tag accent">C</span>
+      <span class="tag accent">SQL</span>
+      <span class="tag accent">Excel Intermediate</span>
+      <span class="tag accent">Power Apps · Basic</span>
+      <span class="tag accent">Power Automate · Basic</span>
+      <span class="tag">KPI Tracking</span>
+      <span class="tag">C / PHP</span>
+      <span class="tag">Agile · Lean</span>
+    </div>
+    <div class="hero-cta">
+      <a href="mailto:alfredomoralesmz@gmail.com" class="btn btn-primary">Contact →</a>
+      <a href="https://linkedin.com/in/alfredo-morales-0225a228a/" target="_blank" class="btn btn-secondary">LinkedIn</a>
+      <a href="https://github.com/alfredoMoralesM" target="_blank" class="btn btn-secondary">GitHub</a>
+    </div>
+  </div>
+  <div class="hero-aside">
+    <div class="status-badge"><span class="dot"></span> Available</div>
+    <div class="hero-meta">
+      📍 San Luis Potosí, MX<br>
+      🎓 UPSLP — 7th semester<br>
+      🌐 English B1<br>
+      📧 <a href="mailto:alfredomoralesmz@gmail.com">alfredomoralesmz</a>
+    </div>
+  </div>
+</div>
+
+<hr class="divider">
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="section-label">Technical Projects</div>
+  <h2>What I've Built</h2>
+  <p class="section-intro">Four projects applying automation, data structures, full-stack web development and teamwork.</p>
+
+  <div class="projects-grid">
+
+    <!-- 1. SELF SERVICE -->
+    <div class="project-card">
+      <div class="card-badge-row">
+        <span class="badge badge-live">● Live</span>
+        <span class="badge badge-web">Web Full-Stack</span>
+        <span class="badge badge-github">PHP · MySQL · HTML· CSS</span>
+      </div>
+      <div class="card-header">
+        <div class="card-title-area">
+          <h3>Academic Self-Service Platform</h3>
+          <span class="card-meta">UPSLP · Aug 2024 – Sep 2025</span>
+        </div>
+        <div class="card-links">
+          <a href="https://self-service-system.free.nf/proyecto_Self_service/login.php" target="_blank" class="card-link primary">Ver demo →</a>
+        </div>
+      </div>
+      <!-- GALLERY -->
+      <div class="project-gallery">
+        <div class="gallery-label">Screenshots</div>
+        <div class="gallery-grid">
+          <div class="gallery-item"><img src="images/self1.png" alt="Self-Service screenshot 1"></div>
+          <div class="gallery-item"><img src="images/self2.png" alt="Self-Service screenshot 2"></div>
+          <div class="gallery-item"><img src="images/self3.png" alt="Self-Service screenshot 3"></div>
+          <div class="gallery-item"><img src="images/self4.png" alt="Self-Service screenshot 4"></div>
+        </div>
+      </div>
+
+      <p class="card-desc">
+        Multi-role web platform (students, teachers, admins) that digitized end-to-end academic record management, eliminating manual PDF processing and reducing administrative workload by ~60%. Includes PDF generation and exportable reports.
+      </p>
+      <ul class="card-highlights">
+        <li>Subject recommendation algorithm with academic history analysis (failed, prerequisites, pending)</li>
+        <li>Role-based dashboards with report and Kardex PDF export</li>
+        <li>User registration and removal with full role management from the admin panel</li>
+        <li>Per-student statistics accessible to teachers and administrators</li>
+      </ul>
+
+      <!-- CREDENTIALS -->
+      <div class="credentials-box">
+        <div class="cred-title">🔑 Test Access</div>
+        <div class="cred-note" style="margin-bottom:12px;">⚠ Allow pop-up windows in your browser to view generated PDFs.</div>
+
+        <div class="cred-section">
+          <div class="cred-section-label">System Roles</div>
+          <div class="cred-grid">
+            <div class="cred-item">
+              <div class="label">Administrator — full access</div>
+              <div class="value">admin / 1234</div>
+            </div>
+            <div class="cred-item">
+              <div class="label">Teacher — student statistics</div>
+              <div class="value">lilygamez / 1234</div>
+            </div>
+            <div class="cred-item">
+              <div class="label">Student</div>
+              <div class="value">184937 / 1234</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="cred-section">
+          <div class="cred-section-label">Student IDs for lookup (Kardex & Student Report)</div>
+          <div class="cred-matriculas">
+            <span class="cred-mat-pill">183618</span>
+            <span class="cred-mat-pill">171685</span>
+            <span class="cred-mat-pill">184838</span>
+            <span class="cred-mat-pill">184972</span>
+          </div>
+        </div>
+
+        <div class="cred-section" style="margin-bottom:0;">
+          <div class="cred-section-label">Available Functions</div>
+          <div style="font-size:12px;color:#4A2C08;line-height:1.8;">
+            ✓ User registration & removal &nbsp;·&nbsp; ✓ Kardex lookup &nbsp;·&nbsp; ✓ Student Report &nbsp;·&nbsp; ✓ Teacher statistics
+          </div>
+        </div>
+      </div>
+
+      <!-- PDF MANUALS -->
+      <div class="manuals-area">
+        <div class="manuals-title">📄 User Manuals</div>
+        <div class="manuals-grid">
+          <a href="manual_tecnico.pdf" target="_blank" class="manual-item">
+            <span class="manual-icon">📋</span>
+            <div class="manual-info">
+              <div class="manual-name">Technical Manual</div>
+              <div class="manual-role">Full system management</div>
+            </div>
+          </a>
+          <a href="manual_usuario.pdf" target="_blank" class="manual-item">
+            <span class="manual-icon">👨‍🏫</span>
+            <div class="manual-info">
+              <div class="manual-name">User Manual</div>
+              <div class="manual-role">Statistics, reports & kardex</div>
+            </div>
+          </a>
+        </div>
+      </div>
+
+      <div class="card-footer" style="margin-top:16px;">
+        <div class="tech-stack">
+          <span class="tech">PHP</span><span class="tech">MySQL</span><span class="tech">JavaScript</span>
+          <span class="tech">HTML5/CSS3</span><span class="tech">PDF Generation</span><span class="tech">GitHub</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 2. POS SYSTEM -->
+    <div class="project-card">
+      <div class="card-badge-row">
+        <span class="badge badge-github">GitHub — README disponible</span>
+        <span class="badge badge-web">Full-Stack</span>
+      </div>
+      <div class="card-header">
+        <div class="card-title-area">
+          <h3>Point of Sale (POS) System</h3>
+          <span class="card-meta">Freelance / Academic · Jan 2026 – May 2026</span>
+        </div>
+        <div class="card-links">
+          <a href="https://github.com/alfredoMoralesM/lenguajes_pos.git" target="_blank" class="card-link">Ver en GitHub →</a>
+        </div>
+      </div>
+      <!-- GALLERY -->
+      <div class="project-gallery">
+        <div class="gallery-label">Screenshots</div>
+        <div class="gallery-grid">
+          <div class="gallery-item"><img src="images/pos1.png" alt="POS screenshot 1"></div>
+          <div class="gallery-item"><img src="images/pos2.png" alt="POS screenshot 2"></div>
+          <div class="gallery-item"><img src="images/pos3.png" alt="POS screenshot 3"></div>
+          <div class="gallery-item"><img src="images/pos4.png" alt="POS screenshot 4"></div>
+        </div>
+      </div>
+
+      <p class="card-desc">
+        Full-stack POS application (FastAPI + Flutter + SQLite) that reduced manual billing time by ~50%
+        and enabled real-time inventory tracking. The executable is not distributed on the web; the repository
+        includes a README with installation instructions and screenshots.
+      </p>
+      <ul class="card-highlights">
+        <li>Automated CRUD workflows: products, cart, end-of-day closing report and daily KPIs</li>
+        <li>Normalized DB schema for data integrity, traceability and auditing</li>
+        <li>Decoupled REST API for frontend (Flutter) – backend (FastAPI) sync without external dependencies</li>
+      </ul>
+
+      <div class="card-footer">
+        <div class="tech-stack">
+          <span class="tech">FastAPI</span><span class="tech">Python</span><span class="tech">Flutter</span>
+          <span class="tech">SQLite</span><span class="tech">REST API</span><span class="tech">Dart</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 3. SITIO ATIT -->
+    <div class="project-card">
+      <div class="card-badge-row">
+        <span class="badge badge-proposal">Sitio ATIT</span>
+        <span class="badge badge-web">Frontend Lead</span>
+      </div>
+      <div class="card-header">
+        <div class="card-title-area">
+          <h3>Institutional Website — ATIT UPSLP</h3>
+          <span class="card-meta">IT & Telematics Academy · Jan 2024 – Aug 2024</span>
+        </div>
+        <div class="card-links">
+          <a href="https://alfredomoralesm.github.io/atit/" target="_blank" class="card-link primary">Ver sitio →</a>
+          <a href="https://github.com/alfredoMoralesM/atit.git" target="_blank" class="card-link">GitHub</a>
+        </div>
+      </div>
+      <!-- GALLERY -->
+      <div class="project-gallery">
+        <div class="gallery-label">Screenshots</div>
+        <div class="gallery-grid">
+          <div class="gallery-item"><img src="images/atit1.png" alt="ATIT screenshot 1"></div>
+          <div class="gallery-item"><img src="images/atit2.png" alt="ATIT screenshot 2"></div>
+          <div class="gallery-item"><img src="images/atit3.png" alt="ATIT screenshot 3"></div>
+          <div class="gallery-item"><img src="images/atit4.png" alt="ATIT screenshot 4"></div>
+        </div>
+      </div>
+
+      <p class="card-desc">
+        Redesign proposal for the official website of the Information Technology and Telematics Academy
+        (ATIT) at UPSLP. Academic team project — not the institution's official website.
+        Includes sections: Home, Programs, Staff, Internships, Projects, Videos, Indicators,
+        Interaction, Gallery and Help.
+      </p>
+      <ul class="card-highlights">
+        <li>Led the frontend team with sprint planning, code reviews and Git workflows — ~30% delivery improvement</li>
+        <li>Responsive design (RWD) across all pages + custom video streaming module</li>
+        <li>Standard branching and pull requests to scale the process and reduce merge conflicts</li>
+      </ul>
+
+      <div class="card-footer">
+        <div class="tech-stack">
+          <span class="tech">HTML5/CSS3</span><span class="tech">JavaScript ES6+</span>
+          <span class="tech">Bootstrap 5</span><span class="tech">Git/GitHub</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 4. RESTAURANTE C -->
+    <div class="project-card">
+      <div class="card-badge-row">
+        <span class="badge badge-github">GitHub</span>
+        <span class="badge badge-console">Consola · C</span>
+      </div>
+      <div class="card-header">
+        <div class="card-title-area">
+          <h3>Restaurant Management System</h3>
+          <span class="card-meta">UPSLP · Aug 2024 – Dec 2024</span>
+        </div>
+        <div class="card-links">
+          <a href="https://github.com/alfredoMoralesM/restaurant-management-system-c.git" target="_blank" class="card-link">Ver en GitHub →</a>
+        </div>
+      </div>
+      <!-- GALLERY -->
+      <div class="project-gallery">
+        <div class="gallery-label">Screenshots</div>
+        <div class="gallery-grid">
+          <div class="gallery-item"><img src="images/rest1.png" alt="Restaurant screenshot 1"></div>
+          <div class="gallery-item"><img src="images/rest2.png" alt="Restaurant screenshot 2"></div>
+          <div class="gallery-item"><img src="images/rest3.png" alt="Restaurant screenshot 3"></div>
+          <div class="gallery-item"><img src="images/rest4.png" alt="Restaurant screenshot 4"></div>
+        </div>
+      </div>
+
+      <p class="card-desc">
+        Console-based C system with an interactive keyboard-navigable menu interface. Implements classic
+        data structures for order, inventory and sales management at a quesadilla restaurant.
+        Includes <code style="font-family:'DM Mono',monospace;font-size:12px;background:var(--tag-bg);padding:1px 5px;border-radius:3px;">menu.h</code>,
+        <code style="font-family:'DM Mono',monospace;font-size:12px;background:var(--tag-bg);padding:1px 5px;border-radius:3px;">listas.h</code>
+        header files and a console interface screenshot.
+      </p>
+      <ul class="card-highlights">
+        <li>Doubly linked list (DLL) for bidirectional menu navigation with visual selector (>>)</li>
+        <li>Singly linked list for the shopping cart with product expiry validation</li>
+        <li>Per-dish info panel: ID, description, price, cooking time, rating and expiry</li>
+        <li>Full keyboard navigation: ↑↓ to browse, Enter to add, C for cart, Esc to exit</li>
+      </ul>
+
+      <div class="card-footer" style="margin-top:14px;">
+        <div class="tech-stack">
+          <span class="tech">C</span><span class="tech">Linked Lists</span>
+          <span class="tech">DLL</span><span class="tech">Stacks &amp; Queues</span><span class="tech">Win32 Console</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="section-label">Technical Skills</div>
+  <h2>Stack & Tools</h2>
+  <p class="section-intro">An honest mix of programming, data and automation tools relevant for Finance Operations.</p>
+
+  <div class="skills-grid">
+    <div class="skill-group">
+      <div class="skill-group-title">Power Platform & Office</div>
+      <div class="skill-item"><span class="skill-name">Excel</span><span class="skill-level">Intermediate</span><div class="skill-bar-wrap"><div class="skill-bar" style="width:65%"></div></div></div>
+      <div class="skill-item"><span class="skill-name">Power Automate</span><span class="skill-level">Basic</span><div class="skill-bar-wrap"><div class="skill-bar" style="width:40%"></div></div></div>
+      <div class="skill-item"><span class="skill-name">Power Apps</span><span class="skill-level">Basic</span><div class="skill-bar-wrap"><div class="skill-bar" style="width:35%"></div></div></div>
+      <div class="skill-item"><span class="skill-name">Word / PowerPoint</span><span class="skill-level">Advanced</span><div class="skill-bar-wrap"><div class="skill-bar" style="width:85%"></div></div></div>
+    </div>
+    <div class="skill-group">
+      <div class="skill-group-title">Programming Languages</div>
+      <div class="skill-item"><span class="skill-name">Python</span><span class="skill-level">Intermediate</span><div class="skill-bar-wrap"><div class="skill-bar" style="width:72%"></div></div></div>
+      <div class="skill-item"><span class="skill-name">JavaScript (ES6+)</span><span class="skill-level">Intermediate</span><div class="skill-bar-wrap"><div class="skill-bar" style="width:70%"></div></div></div>
+      <div class="skill-item"><span class="skill-name">C / C++</span><span class="skill-level">Intermediate</span><div class="skill-bar-wrap"><div class="skill-bar" style="width:68%"></div></div></div>
+      <div class="skill-item"><span class="skill-name">PHP / SQL</span><span class="skill-level">Intermediate</span><div class="skill-bar-wrap"><div class="skill-bar" style="width:65%"></div></div></div>
+      <div class="skill-item"><span class="skill-name">Visual Basic</span><span class="skill-level">Basic</span><div class="skill-bar-wrap"><div class="skill-bar" style="width:35%"></div></div></div>
+    </div>
+    <div class="skill-group">
+      <div class="skill-group-title">Data & Systems</div>
+      <div class="skill-item"><span class="skill-name">SQLite / MySQL</span><span class="skill-level">Intermediate</span><div class="skill-bar-wrap"><div class="skill-bar" style="width:70%"></div></div></div>
+      <div class="skill-item"><span class="skill-name">KPI Tracking</span><span class="skill-level">Applied</span><div class="skill-bar-wrap"><div class="skill-bar" style="width:75%"></div></div></div>
+      <div class="skill-item"><span class="skill-name">Report Generation</span><span class="skill-level">Applied</span><div class="skill-bar-wrap"><div class="skill-bar" style="width:72%"></div></div></div>
+      <div class="skill-item"><span class="skill-name">Linux (NDG)</span><span class="skill-level">In progress</span><div class="skill-bar-wrap"><div class="skill-bar" style="width:30%"></div></div></div>
+    </div>
+    <div class="skill-group">
+      <div class="skill-group-title">Methodology & Process</div>
+      <div class="skill-item"><span class="skill-name">Git / GitHub</span><span class="skill-level">Intermediate</span><div class="skill-bar-wrap"><div class="skill-bar" style="width:78%"></div></div></div>
+      <div class="skill-item"><span class="skill-name">Process Automation</span><span class="skill-level">Applied</span><div class="skill-bar-wrap"><div class="skill-bar" style="width:75%"></div></div></div>
+      <div class="skill-item"><span class="skill-name">Agile / Sprints</span><span class="skill-level">Basic</span><div class="skill-bar-wrap"><div class="skill-bar" style="width:55%"></div></div></div>
+      <div class="skill-item"><span class="skill-name">Lean Principles</span><span class="skill-level">Basic</span><div class="skill-bar-wrap"><div class="skill-bar" style="width:40%"></div></div></div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- CERTS -->
+<section id="certs">
+  <div class="section-label">Certifications</div>
+  <h2>Credentials</h2>
+  <p class="section-intro">Cisco, Microsoft and Certiport validated certifications.</p>
+  <div class="cert-list">
+    <div class="cert-item"><div class="cert-icon">🏅</div><div><div class="cert-name">Microsoft Office Specialist (MOS) — Associate Level</div><div class="cert-issuer">Microsoft</div></div></div>
+    <div class="cert-item"><div class="cert-icon">🌐</div><div><div class="cert-name">IT Specialist — HTML &amp; CSS</div><div class="cert-issuer">Certiport / ITS</div></div></div>
+    <div class="cert-item"><div class="cert-icon">🐍</div><div><div class="cert-name">Python Essentials 1</div><div class="cert-issuer">Cisco Networking Academy</div></div></div>
+    <div class="cert-item"><div class="cert-icon">🔧</div><div><div class="cert-name">IT Essentials</div><div class="cert-issuer">Cisco Networking Academy</div></div></div>
+    <div class="cert-item"><div class="cert-icon">📡</div><div><div class="cert-name">Introduction to IoT</div><div class="cert-issuer">Cisco Networking Academy</div></div></div>
+    <div class="cert-item"><div class="cert-icon">🐧</div><div><div class="cert-name">NDG Linux Essentials <span style="font-size:11px;color:var(--muted)">(in progress)</span></div><div class="cert-issuer">Cisco Networking Academy</div></div></div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="section-label">About Me</div>
+  <h2>Professional Profile</h2>
+  <div class="about-grid">
+    <div class="about-text">
+      <p>IT Engineering student (7/9 semesters) at UPSLP with hands-on experience in process automation, data-driven systems development and analytical problem-solving — directly aligned with Finance Operations and digital transformation goals.</p>
+      <p>I have designed solutions that eliminate manual workloads, improve data traceability and support operational decision-making in real academic environments. Proactive, analytical and results-oriented.</p>
+      <p>English B1: I read and interpret technical documentation, draft professional emails and reports; comfortable in international work environments such as ABB Finance Operations.</p>
+    </div>
+    <div class="about-stats">
+      <div class="stat-card"><div class="stat-num">6</div><div class="stat-label">Certifications earned</div></div>
+      <div class="stat-card"><div class="stat-num">~60%</div><div class="stat-label">Manual workload reduction achieved</div></div>
+      <div class="stat-card"><div class="stat-num">7/9</div><div class="stat-label">Semesters — UPSLP</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p>Christian Alfredo Morales Meza &nbsp;·&nbsp; San Luis Potosí, México</p>
+  <p style="margin-top:6px;">
+    <a href="mailto:alfredomoralesmz@gmail.com">alfredomoralesmz@gmail.com</a> &nbsp;·&nbsp;
+    <a href="https://linkedin.com/in/alfredo-morales-0225a228a/" target="_blank">LinkedIn</a>
+  </p>
+</footer>
+
+<!-- LIGHTBOX -->
+<div class="lightbox" id="lightbox" onclick="closeLightbox()">
+  <span class="lightbox-close">✕</span>
+  <img id="lightbox-img" src="" alt="">
+</div>
+
+<script>
+function openLightbox(src) {
+  document.getElementById('lightbox-img').src = src;
+  document.getElementById('lightbox').classList.add('open');
+}
+function closeLightbox() {
+  document.getElementById('lightbox').classList.remove('open');
+}
+document.querySelectorAll('.gallery-item img').forEach(img => {
+  img.parentElement.addEventListener('click', () => openLightbox(img.src));
+});
+</script>
+</body>
+</html>
