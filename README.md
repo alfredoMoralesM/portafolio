@@ -7,7 +7,7 @@
 
 ## 🔗 Live
 
-[alfredomoralesm.github.io/portfolio](https://alfredomoralesm.github.io/portfolio) <!-- update with your actual URL -->
+[alfredomoralesm.github.io/portfolio]([https://alfredomoralesm.github.io/portfolio](https://alfredomoralesm.github.io/portafolio/))
 
 ---
 
